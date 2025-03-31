@@ -211,11 +211,14 @@ func getECRClientFromVariables(ctx context.Context, log logr.Logger) (*ecr.Clien
 	var sessionToken string
 	// check if sessionToken exists and read it
 	if _, err := os.Stat(sessionTokenPath); !os.IsNotExist(err) {
+		log.Info("session token exists")
 		sessionTokenByte, err := os.ReadFile(sessionTokenPath)
 		if err != nil {
 			log.Error(err, "Cannot get sessionToken from file, %v")
 		}
 		sessionToken = strings.Trim(string(sessionTokenByte), "'")
+		log.Info("session token exists", sessionToken)
+		log.Info(sessionToken)
 	}
 
 	cfg, err := awsConfig.LoadDefaultConfig(ctx,
