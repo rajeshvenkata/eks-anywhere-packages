@@ -217,10 +217,11 @@ func getECRClientFromVariables(ctx context.Context, log logr.Logger) (*ecr.Clien
 			log.Error(err, "Cannot get sessionToken from file, %v")
 		}
 		sessionToken = strings.Trim(string(sessionTokenByte), "'")
-		log.Info("session token exists", sessionToken)
+		log.Info("session token is")
 		log.Info(sessionToken)
 	}
-
+	log.Info("session token is")
+	log.Info(sessionToken)
 	cfg, err := awsConfig.LoadDefaultConfig(ctx,
 		awsConfig.WithCredentialsProvider(awsCredentials.NewStaticCredentialsProvider(accessKey, secretAccessKey, sessionToken)),
 		awsConfig.WithRegion(region),
